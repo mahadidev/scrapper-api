@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SubscriptionPlan extends Model
+class Subscribe extends Model
 {
     use HasFactory;
 
@@ -13,6 +13,7 @@ class SubscriptionPlan extends Model
         "name",
         "requests_total",
         "requests_used",
-        "requests_available"
+        "requests_available",
+        "plan_ref"
     ];
 }

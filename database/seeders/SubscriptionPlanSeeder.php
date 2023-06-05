@@ -13,22 +13,20 @@ class SubscriptionPlanSeeder extends Seeder
      */
     public function run(): void
     {
-        $plans = [[
-            "name" => "Free Trail",
-            "requests_total" => 15,
-            "requests_used" => 0,
-            "requests_available" => 15,
-        ],[
-            "name" => "Standard",
-            "requests_total" => 50,
-            "requests_used" => 0,
-            "requests_available" => 50,
-        ],[
-            "name" => "Dexul",
-            "requests_total" => 500,
-            "requests_used" => 0,
-            "requests_available" => 500,
-        ]];
+        $plans = [
+            [
+                "name" => "Free Trail",
+                "requests_total" => 15,
+            ],
+            [
+                "name" => "Standard",
+                "requests_total" => 50,
+            ],
+            [
+                "name" => "Dexul",
+                "requests_total" => 500,
+            ]
+        ];
 
         foreach ($plans as $plan) {
             SubscriptionPlan::create($plan);

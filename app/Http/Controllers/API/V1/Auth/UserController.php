@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API\V1\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\ApiResource;
 use App\Http\Resources\V1\Auth\UserResource;
+use App\Models\Subscribe;
+use App\Models\SubscriptionPlan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,10 +27,22 @@ class UserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+
+        $subscriptionPlan = SubscriptionPlan::where(["id" => 1])->first();
+
+        // subscribe user to trail
+        $subscribe = Subscribe::create([
+            "name" => $subscriptionPlan->name,
+            "requests_total" => $subscriptionPlan->requests_total,
+            "requests_used" => 0,
+            "requests_available" => $subscriptionPlan->requests_total,
+        ]);
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            "subscribe_ref" => $subscribe->id
         ]);
 
         $token = $user->createToken("customer", ["customer", "get"]);
